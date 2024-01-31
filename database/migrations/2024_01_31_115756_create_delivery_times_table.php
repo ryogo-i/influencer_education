@@ -12,11 +12,11 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('curriculum_progress', function (Blueprint $table) {
+        Schema::create('delivery_times', function (Blueprint $table) {
             $table->id();
-            $table->integer('curriculums_id');
-            $table->integer('users_id');
-            $table->tinyInteger('clear_flg'); //クリアフラグ
+            $table->foreignId('curriculum_id')->constrained('curriculums')->onDelete('cascade'); // カリキュラムID
+            $table->date('delivery_from'); // 配信開始日
+            $table->date('delivery_to'); // 配信終了日
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('curriculum_progress');
+        Schema::dropIfExists('delivery_times');
     }
 };

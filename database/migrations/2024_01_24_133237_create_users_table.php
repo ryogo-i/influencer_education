@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -20,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();//メールアドレス
             $table->string('password');//パスワード
             $table->string('profile_image');//プロフィール画像
-            $table->integer('classes_id');//クラスID
+            $table->integer('now_class');//クラスID
             $table->timestamps();
         });
     }
