@@ -22,6 +22,6 @@ class CurriculumProgress extends Model
     }
 
     public function curriculum() {
-        return $this->belongsTo(Curriculum::class, 'curriculumss_id');
+        return $this->belongsTo(Curriculum::class, 'curriculums_id');
     }
 }

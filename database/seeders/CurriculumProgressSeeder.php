@@ -16,9 +16,11 @@ class CurriculumProgressSeeder extends Seeder
     public function run()
     {
         CurriculumProgress::create([
-            'curriculum_id' => 1,
+            'curriculumus_id' => 1,
             'users_id' => 1,
             'clear_flg' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

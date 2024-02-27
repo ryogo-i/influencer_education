@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Grade;
 use App\Models\Curriculum;
 use App\Models\CurriculumProgress;
+use Illuminate\Support\Facades\DB;
+
 
 class CurriculumProgressController extends Controller
 {
@@ -21,16 +23,23 @@ class CurriculumProgressController extends Controller
 
         // 受講済みを表示、非表示の処理
         // 指定されたユーザーの進捗データ
-        $curriculum_progress = CurriculumProgress::where('users_id', $user->id)->get();
+        $curriculumProgress = DB::table('curriculums')
+            ->leftJoin('curriculum_progress', 'curriculums.id', '=', 'curriculum_progress.curriculumus_id')
+            ->select('curriculums.*', 'curriculum_progress.clear_flg')
+            ->where('curriculum_progress.users_id', $user->id)
+            ->orWhereNull('curriculum_progress.curriculumus_id')
+            ->get();
+
 
         // カリキュラムごとの進捗データ
         
         $curriculumProgressData = []; //カリキュラムごとの進捗データを格納するための空の配列を初期化
 
         foreach ($curriculums as $curriculum) {
-            $isCleared = $curriculum_progress->where('curriculums_id', $curriculum->id)->first();//ユーザーが特定のカリキュラムを受講済みか
-            $curriculumProgressData[$curriculum->id] = $isCleared;//カリキュラムごとにユーザーの受講済み情報を格納
+            $isCleared = $curriculumProgress->where('curriculumus_id', $curriculum->id)->first();
+            $curriculumProgressData[$curriculum->id] = $isCleared;
         }
+
 
         return view('user.progress', compact('user', 'grades', 'curriculums', 'curriculumProgressData'));
 

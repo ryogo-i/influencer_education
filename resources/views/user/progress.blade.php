@@ -23,8 +23,7 @@
         </div>
         <div class="class_title">
             @foreach ($curriculums as $curriculum)
-                @if ($curriculumProgressData[$curriculum->id] &&
-                     $curriculumProgressData[$curriculum->id]->clear_flg == 1)
+                @if ($curriculumProgressData[$curriculum->id] && $curriculumProgressData[$curriculum->id]->clear_flg == 1)
                     <span class="clear_flg">受講済</span>
                 @endif
                 @if ($curriculum->classes_id == $grade->id)
