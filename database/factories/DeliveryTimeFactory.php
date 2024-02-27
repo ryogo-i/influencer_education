@@ -18,11 +18,11 @@ class DeliveryTimeFactory extends Factory
      */
     public function definition()
     {
-        $curriculumIds = Curriculum::pluck('id')->toArray(); // Curriculums テーブルの全ての ID を配列として取得
-        $curriculumId = $this->faker->randomElement($curriculumIds); // 配列からランダムに1つの ID を選択
+        $curriculumIds = Curriculum::pluck('id')->toArray();
+        $curriculumId = $this->faker->randomElement($curriculumIds);
 
-        $deliveryFrom = $this->faker->dateTimeBetween($startDate = '2023-04-01', $endDate = '2024-02-28');
-        $deliveryTo = $this->faker->dateTimeBetween($startDate = $deliveryFrom, $endDate = '2024-03-31');
+        $deliveryFrom = $this->faker->dateTimeBetween($startDate = '2023-04-01', $endDate = '2024-02-28')->setTime(0, 0, 0);
+        $deliveryTo = $this->faker->dateTimeBetween($startDate = $deliveryFrom, $interval = '+24 hours')->setTime(17, 0, 0);
 
         return [
             'curriculum_id' => $curriculumId,

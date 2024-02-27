@@ -1,0 +1,204 @@
+* {
+    box-sizing: border-box;
+}
+
+.app {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0px;
+    width: 100%;
+    height: 100px;
+    background-color: #47d5f8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
+
+.nav-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100%;
+    
+}
+
+.nav-item {
+    margin-left: 30px;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 20px;
+    vertical-align: center;
+    display: flex;
+}
+
+.pc-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.nav-link,
+.logout {
+    display: inline-block;
+    padding: 5px 15px;
+    padding-top: 8px;
+    background-color: #86766d;
+    color: #fff;
+    border-radius: 15px;
+    vertical-align: middle;
+    text-decoration: none;
+}
+
+aside {
+    padding: 10px;
+    width: 220px;
+    position: fixed;
+    top: 93px;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    
+}
+
+.sidebar {
+    padding: 10px;
+}
+
+.sidebar .btn-secondary {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.navbar-brand {
+    text-decoration: none;
+}
+
+.sidebar .nav-link {
+    margin: 15px 0px 0 0;
+    width: 100%;
+    color: #333333;
+    background-color: #c2b8fc;
+}
+
+.logout {
+    margin-left: auto;
+}
+
+.logout button {
+    background-color: transparent;
+    color: #fff; /* ボタンの文字色を白に */
+    text-decoration: none; /* テキストの下線を消す */
+    cursor: pointer; /* ホバー時のカーソルをポインターに */
+    font-size: 16px; /* Font size */
+    outline: none;
+    border: none;
+    height: 100%;
+    margin-left: auto;
+    width: 100%;
+}
+
+.logout button:hover {
+    background-color: transparent;
+}
+
+main {
+    margin-left: 220px;
+    margin-top:70px;
+    padding: 20px;
+}
+
+/* ---------contents----------- */
+
+.top {
+    margin-top: 120px;
+    padding-left: 20px;
+    width: 40%;
+    border: 1px solid rgba(94, 93, 93, 0.253);
+}
+
+.imageTag {
+    display: flex;
+    list-style-type: none;
+    padding-top: 30px;
+}
+
+.imageTag .image-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.file {
+    display: flex;
+    padding-left: 80px;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-image {
+    color: white;
+}
+
+.image {
+    width: auto;
+    height: 240px;
+}
+
+.form-group,
+.banner_create {
+    margin: 50px;
+}
+
+.create-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: green;
+    border: none;
+    color: white;
+    font-size: 24px;
+    line-height: 30px;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-btn {
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ff6b6b;
+    border: none;
+    color: white;
+    font-size: 24px;
+    line-height: 1.4;
+    padding: 0;
+    cursor: pointer;
+  }
+
+.banner_create {
+    font-size: 24px;
+    width: 150px;
+    background-color: green;
+    color: white;
+}
+
+button:hover {
+    background-color: #030303;
+}
+

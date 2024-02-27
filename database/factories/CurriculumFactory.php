@@ -26,7 +26,7 @@ class CurriculumFactory extends Factory
             'thumbnail' => $faker->imageUrl($width = 640, $height = 480, $category = 'cats', $randomize = true, $word = null),
             'description' => $faker->realText($maxNbChars = 50, $indexSize = 2),
             'video_url' => $faker->url(),
-            'alway_delivery_flg' => $faker->numberBetween($min = 0, $max = 1),
+            'alway_delivery_flg' => $faker->numberBetween($min = 0, $max = 1),//1の場合は常時公開とする。
             'classes_id' => $faker->numberBetween($min = 1, $max = 12),
         ];
     }

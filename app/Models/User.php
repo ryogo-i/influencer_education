@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -50,4 +51,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getCurrentClassId()
+    {
+        return $this->now_class;
+    }
+
+    public function getCurrentClassName()
+    {
+        return $this->now_class ? Course::find($this->now_class)->name : null;
+    }
+
+    public static function getUserById($userId)
+    {
+        return static::find($userId);
+    }
+
 }
