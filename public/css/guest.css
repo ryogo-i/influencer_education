@@ -1,0 +1,66 @@
+header {
+    text-align: right;
+    padding: 10px 20px;
+}
+
+.register {
+    text-decoration: none;
+    font-size: 16px;
+    color: #000;
+}
+
+.register:hover {
+    color: #00b3ff;
+}
+
+
+.container {
+    text-align: center;
+    padding: 40px 20px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.container h1 {
+    font-size: 44px;
+}
+
+
+form {
+    top: 70px;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+}
+
+label {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 18px;
+    position: absolute;
+    width: 130px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 70%;
+    padding: 10px;
+    margin-bottom: 30px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 150px;
+}
+
+button {
+    background-color: #5b7177;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    width: 120px;
+}
