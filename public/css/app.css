@@ -180,12 +180,17 @@ header {
     display: inline-block;
     text-decoration: none;
     color: black;
-    margin-left: 50px;
+    margin-left: 20px;
     padding: 3px 0;
 }
 
 .clear_flg {
     color: red;
+    font-size: small;
+}
+
+.not_clear {
+    visibility: hidden; 
     font-size: small;
 }
 

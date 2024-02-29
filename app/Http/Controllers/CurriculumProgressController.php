@@ -29,19 +29,8 @@ class CurriculumProgressController extends Controller
             ->where('curriculum_progress.users_id', $user->id)
             ->orWhereNull('curriculum_progress.curriculumus_id')
             ->get();
-
-
-        // カリキュラムごとの進捗データ
-        
-        $curriculumProgressData = []; //カリキュラムごとの進捗データを格納するための空の配列を初期化
-
-        foreach ($curriculums as $curriculum) {
-            $isCleared = $curriculumProgress->where('curriculumus_id', $curriculum->id)->first();
-            $curriculumProgressData[$curriculum->id] = $isCleared;
-        }
-
-
-        return view('user.progress', compact('user', 'grades', 'curriculums', 'curriculumProgressData'));
+            
+        return view('user.progress', compact('user', 'grades', 'curriculums', 'curriculumProgress'));
 
     }
 }

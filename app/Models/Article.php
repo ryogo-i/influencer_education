@@ -15,5 +15,12 @@ class Article extends Model
         'article_contents',
     ];
 
-    
+    // 管理者側の操作
+
+    // お知らせを削除
+    public function deleteArticle() {
+        $this->delete();
+    }
+
+
 }

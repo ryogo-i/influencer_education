@@ -17,24 +17,28 @@
 
 <div class="grade_class_container">
     @foreach ($grades as $grade)
-    <div class="grade_class_title">
-        <div class="grade">
-            <p>{{ $grade->name }}</p>
-        </div>
-        <div class="class_title">
-            @foreach ($curriculums as $curriculum)
-                @if ($curriculumProgressData[$curriculum->id] && $curriculumProgressData[$curriculum->id]->clear_flg == 1)
-                    <span class="clear_flg">受講済</span>
-                @endif
-                @if ($curriculum->classes_id == $grade->id)
-                        @if ($user->grade->id >= $grade->id)
-                            <a href="{{ route('user.curiiculum.show', ['id' => $curriculum->id]) }}">{{ $curriculum->title }}</a>
-                        @else
-                            <a>{{ $curriculum->title }}</a>
-                        @endif
+        <div class="grade_class_title">
+            <div class="grade">
+                <p>{{ $grade->name }}</p>
+            </div>
+            <div class="class_title">
+                @foreach ($curriculumProgress as $progress)
+                    @if ($progress->classes_id == $grade->id)
+                        <div>
+                            @if ($progress->clear_flg == 1)
+                                <span class="clear_flg">受講済</span>
+                            @else
+                                <span class="not_clear">未受講</span>
+                            @endif
+                            @if ($user->grade->id >= $grade->id)
+                                <a href="{{ route('user.curiiculum.show', ['id' => $progress->id]) }}">{{ $progress->title }}</a>
+                            @else
+                                <a>{{ $progress->title }}</a>
+                            @endif
+                        </div>
                     @endif
-            @endforeach
-        </div>
+                @endforeach
+            </div>
         </div>
     @endforeach
 </div>

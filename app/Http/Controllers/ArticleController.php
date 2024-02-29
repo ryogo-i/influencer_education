@@ -55,7 +55,7 @@ class ArticleController extends Controller
     public function articleDelete($id)
     {
         $article = Article::find($id);
-        $article->delete();
+        $article->deleteArticle();
 
         return redirect()->route('article.list')->with('success', 'お知らせを削除しました。');
     }
