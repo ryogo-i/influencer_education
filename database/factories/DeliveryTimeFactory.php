@@ -21,8 +21,8 @@ class DeliveryTimeFactory extends Factory
         $curriculumIds = Curriculum::pluck('id')->toArray();
         $curriculumId = $this->faker->randomElement($curriculumIds);
 
-        $deliveryFrom = $this->faker->dateTimeBetween($startDate = '2023-04-01', $endDate = '2024-02-28')->setTime(0, 0, 0);
-        $deliveryTo = $this->faker->dateTimeBetween($startDate = $deliveryFrom, $interval = '+24 hours')->setTime(17, 0, 0);
+        $deliveryFrom = $this->faker->dateTimeBetween($startDate = '2024-04-01', $endDate = '2025-02-28')->setTime(0, 0, 0);
+        $deliveryTo = $this->faker->dateTimeInInterval($deliveryFrom, '+90 day')->setTime(0, 0, 0);
 
         return [
             'curriculum_id' => $curriculumId,

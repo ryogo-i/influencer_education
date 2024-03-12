@@ -33,18 +33,17 @@ class UserController extends Controller
 
             // 表示月
             $currentMonth = $request->input('month') ? Carbon::parse($request->input('month')) : Carbon::now();
-            $firstAllowedMonth = Carbon::create(2023, 4, 1);
-            $lastAllowedMonth = Carbon::create(2024, 3, 31);
+            $firstAllowedMonth = Carbon::create(2024, 4, 1);
+            $lastAllowedMonth = Carbon::create(2025, 3, 31);
 
             if ($currentMonth->lt($firstAllowedMonth) || $currentMonth->gt($lastAllowedMonth)) {
                 $currentMonth = Carbon::now();
             }
 
             // 配信カリキュラムのフィルタリング
-            $curriculums = Curriculum::withDeliveryTimes()->get();
             $curriculum = new Curriculum();
-            $displayMonth = $currentMonth;
-            $filteredCurriculums = $curriculum->filterCurriculumsByClassAndMonth($currentClassId, $displayMonth);
+            $displayMonth = $request->input('month', Carbon::now()->format('Y-m'));
+            $curriculums = Curriculum::filterByClassIdAndMonth($currentClassId, $displayMonth)->get();
 
             // 前月次月の設定
             $monthSettings = Course::getPrevAndNextMonth($currentMonth);
@@ -52,10 +51,10 @@ class UserController extends Controller
             $nextMonth = $monthSettings['nextMonth'];
             $displayMonth = $monthSettings['displayMonth'];
 
-            return view('authenticated.schedule', compact('curriculums', 'filteredCurriculums', 'prevMonth', 'nextMonth', 'displayMonth', 'classes', 'currentClassName', 'currentClassId'));
+            return view('authenticated.schedule', compact('curriculums', 'prevMonth', 'nextMonth', 'displayMonth', 'classes', 'currentClassName', 'currentClassId'));
         } catch (\Exception $e) {
-            \Log::error('Error in UserController@showSchedule: ' . $e->getMessage());
-            return response()->view('errors.500', [], 500);
+            \Log::error('エラーが発生しました: ' . $e->getMessage());
+            return back()->withInput()->withErrors(['error' => 'エラーが発生しました。']);
         }
     }
 }
