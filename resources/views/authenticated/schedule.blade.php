@@ -12,8 +12,7 @@
                         {{ $displayMonth->format('Y年n月') }}スケジュール
                     </p>
                     <button id="nextMonth">▶</button>
-                    <p class="now_class" id="currentClassName" data-current-class-id="{{ $currentClassId }}">{{
-    $currentClassName }}</p>
+                    <p class="now_class" id="currentClassName" data-current-class-id="{{ $currentClassId }}">{{ $currentClassName }}</p>
                 </div>
             </div>
             <div id="schedules_container" class="schedules_container">
