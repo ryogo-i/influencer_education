@@ -23,62 +23,33 @@ class Curriculum extends Model
         return $this->belongsTo(Course::class, 'classes_id', 'id');
     }
 
-    public static function filterByClassId($classId)
-    {
-        return static::where('classes_id', $classId);
-    }
-
-    public function filterDeliveryTimesByMonth($month)
-    {
-        return DB::transaction(function () use ($month) {
-            $this->filteredDeliveryTimes = $this->deliveryTimes->filter(function ($deliveryTime) use ($month) {
-                $from = Carbon::parse($deliveryTime->delivery_from);
-                $to = Carbon::parse($deliveryTime->delivery_to);
-                return $from->format('Y-m') <= $month && $to->format('Y-m') >= $month;
-            })->sortBy('delivery_from');
-        });
-    }
-
-    public static function filterByClassIdAndMonth($classId, $month)
-    {
-        return DB::transaction(function () use ($classId, $month) {
-            return static::where('classes_id', $classId)
-                ->whereHas('deliveryTimes', function ($query) use ($month) {
-                    $query->where('delivery_from', '<=', $month)
-                        ->where('delivery_to', '>=', $month);
-                })
-                ->with('deliveryTimes')
-                ->get();
-        });
-    }
-
     public static function withDeliveryTimes()
     {
         return static::with('deliveryTimes');
     }
 
-    public function filterCurriculumsByClassAndMonth($currentClassId, $displayMonth)
+
+    public static function filterByClassIdAndMonth($classId, $month)
     {
-        return DB::transaction(function () use ($currentClassId, $displayMonth) {
-            $filteredCurriculums = [];
-            $curriculums = static::where('classes_id', $currentClassId)->with('deliveryTimes')->get();
+        $startDate = Carbon::createFromFormat('Y-m', $month)->startOfMonth();
+        $endDate = Carbon::createFromFormat('Y-m', $month)->endOfMonth();
 
-            foreach ($curriculums as $curriculum) {
-                $allDeliveryTimes = $curriculum->deliveryTimes;
-
-                // フラグが1の場合は空のまま表示
-                if ($curriculum->always_delivery_flg == 1) {
-                    $curriculum->filteredDeliveryTimes = $allDeliveryTimes->sortBy('delivery_from');
-                    $filteredCurriculums[] = $curriculum;
-                    continue;
+        return static::where('classes_id', $classId)
+            ->where(function ($query) use ($startDate, $endDate) {
+                $query->whereHas('deliveryTimes', function ($q) use ($startDate, $endDate) {
+                    $q->where(function ($subQuery) use ($startDate, $endDate) {
+                        $subQuery->whereBetween('delivery_from', [$startDate, $endDate])
+                            ->orWhereBetween('delivery_to', [$startDate, $endDate]);
+                    });
+                })->orWhere('alway_delivery_flg', 1);
+            })
+            ->with([
+                'deliveryTimes' => function ($query) use ($startDate, $endDate) {
+                    $query->where(function ($q) use ($startDate, $endDate) {
+                        $q->whereBetween('delivery_from', [$startDate, $endDate])
+                            ->orWhereBetween('delivery_to', [$startDate, $endDate]);
+                    });
                 }
-
-                // すべてのDeliveryTimeを取得する
-                $curriculum->filteredDeliveryTimes = $allDeliveryTimes->sortBy('delivery_from');
-                $filteredCurriculums[] = $curriculum;
-            }
-
-            return $filteredCurriculums;
-        });
+            ]);
     }
 }

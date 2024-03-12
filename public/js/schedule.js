@@ -28,12 +28,18 @@ let currentYear = currentDate.getFullYear();
 
 document.getElementById('prevMonth').addEventListener('click', function (e) {
     e.preventDefault();
+    if (currentMonth === 4) {
+        return;
+    }
     changeMonth(-1);
     console.log('前月クリック');
 });
 
 document.getElementById('nextMonth').addEventListener('click', function (e) {
     e.preventDefault();
+    if (currentMonth === 3) {
+        return;
+    }
     changeMonth(1);
     console.log('次月クリック');
 });
@@ -73,14 +79,9 @@ function changeMonth(monthChange) {
         currentYear += 1;
     }
     if (currentMonth === 4) {
-        $('#prevMonth').hide();
         console.log('前月はこれ以上ありません');
     } else if (currentMonth === 3) {
-        $('#nextMonth').hide();
         console.log('次月はこれ以上ありません');
-    } else {
-        $('#prevMonth').show();
-        $('#nextMonth').show();
     }
     const url = `/authenticated/schedule?month=${currentYear}-${currentMonth}&class_id=${classId}`;
 

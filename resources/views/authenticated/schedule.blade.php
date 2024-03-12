@@ -12,33 +12,32 @@
                         {{ $displayMonth->format('Y年n月') }}スケジュール
                     </p>
                     <button id="nextMonth">▶</button>
-                    <p class="now_class" id="currentClassName" data-current-class-id="{{ $currentClassId }}">{{
-    $currentClassName }}</p>
+                    <p class="now_class" id="currentClassName" data-current-class-id="{{ $currentClassId }}">{{ $currentClassName }}</p>
                 </div>
             </div>
             <div id="schedules_container" class="schedules_container">
-
-            @foreach ($filteredCurriculums as $curriculum)
-                <div class="schedules_column">
-                    @if ($curriculum->thumbnail)
-                        <img src="{{ $curriculum->thumbnail }}" alt="授業サムネイル">
-                    @endif
-                    <p>{{ $curriculum->title }}</p>
-                    <ul>
-                        @php
-    $uniqueDeliveryTimes = $curriculum->filteredDeliveryTimes->unique('id');
-                        @endphp
-                        @foreach ($uniqueDeliveryTimes as $deliveryTime)
-                            <li class="detail">
-                                {{ Carbon\Carbon::parse($deliveryTime->delivery_from)->format('n月j日 H:i') }}
-                                ~
-                                {{ Carbon\Carbon::parse($deliveryTime->delivery_to)->format('H:i') }}
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endforeach
-
+                @foreach ($curriculums as $curriculum)
+                    <div class="schedules_column">
+                        @if ($curriculum->thumbnail)
+                            <img src="{{ $curriculum->thumbnail }}" alt="授業サムネイル">
+                        @endif
+                        <p>{{ $curriculum->title }}</p>
+                        <ul>
+                            @if($curriculum->alway_delivery_flg == 0 && $curriculum->deliveryTimes)
+                                @php
+        $uniqueDeliveryTimes = $curriculum->deliveryTimes->unique('id');
+                                @endphp
+                                @foreach ($uniqueDeliveryTimes as $deliveryTime)
+                                    <li class="detail">
+                                        {{ Carbon\Carbon::parse($deliveryTime->delivery_from)->format('n月j日 H:i') }}
+                                        ~
+                                        {{ Carbon\Carbon::parse($deliveryTime->delivery_to)->format('H:i') }}
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
