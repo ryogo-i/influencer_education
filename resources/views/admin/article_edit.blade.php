@@ -9,7 +9,8 @@
         <input type="hidden" name="id" value="{{ $article->id }}">
         <div class="article_form">
             <label for="posted_date">投稿日時</label>
-            <input type="text" class="form-control" id="posted_date" name="posted_date" value='{{ \Carbon\Carbon::parse($article->posted_date)->format('Y-m-d') }}'>
+            <!-- <input type="text" class="form-control" id="posted_date" name="posted_date" value='{{ \Carbon\Carbon::parse($article->posted_date)->format('Y-m-d') }}'> -->
+            <input type="datetime-local" class="form-control" id="posted_date" name="posted_date" value=''>
             @error('posted_date')
             <p class="error_message">投稿日時を入力してください</p>
             @enderror

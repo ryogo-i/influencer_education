@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Suppoort\Facades\DB;
+use Illuminate\Support\Facades\DB;
 use App\Models\Article;
 
 class ArticleController extends Controller
@@ -16,7 +16,7 @@ class ArticleController extends Controller
      */
     public function userShow($id) 
     {
-        $article = Article::find($id);
+        $article = Article::findOrFail($id);
 
         return view('user.article', compact('article'));
     }
@@ -46,7 +46,7 @@ class ArticleController extends Controller
     // お知らせ変更画面表示
     public function editArticle($id)
     {
-        $article = Article::find($id);
+        $article = Article::findOrFail($id);
 
         return view('admin.article_edit', ['article' => $article]);
     }
@@ -54,7 +54,7 @@ class ArticleController extends Controller
     // お知らせ　削除処理
     public function articleDelete($id)
     {
-        $article = Article::find($id);
+        $article = Article::findOrFail($id);
         $article->deleteArticle();
 
         return redirect()->route('article.list')->with('success', 'お知らせを削除しました。');
@@ -65,8 +65,8 @@ class ArticleController extends Controller
     {
         // バリデーション
         $request->validate([
-            'posted_date' => 'required | date:Y-m-d',
-            'title' => 'required | max:255',
+            'posted_date' => 'required|date_format:Y-m-d',
+            'title' => 'required|max:255',
             'article_contents' => 'required',
         ]);
 
@@ -75,7 +75,7 @@ class ArticleController extends Controller
 
         // お知らせを更新する
         DB::transaction(function()use($inputs) {
-            $article = Article::find($inputs['id']);
+            $article = Article::findOrFail($inputs['id']);
             $article->fill([
                 'posted_date' => $inputs['posted_date'],
                 'title' => $inputs['title'],
@@ -99,8 +99,8 @@ class ArticleController extends Controller
        
         // バリデーション
         $request->validate([
-            'posted_date' => 'required | date',
-            'title' => 'required | max:255',
+            'posted_date' => 'required|date',
+            'title' => 'required|max:255',
             'article_contents' => 'required',
         ]);
 
