@@ -16,7 +16,7 @@ class CurriculumsTableSeeder extends Seeder
     public function run()
     {
         Curriculum::factory()
-            ->count(10)
+            ->count(20)
             ->create();
     }
 }

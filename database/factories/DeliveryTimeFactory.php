@@ -22,7 +22,7 @@ class DeliveryTimeFactory extends Factory
         $curriculumId = $this->faker->randomElement($curriculumIds);
 
         $deliveryFrom = $this->faker->dateTimeBetween($startDate = '2024-04-01', $endDate = '2025-02-28')->setTime(0, 0, 0);
-        $deliveryTo = $this->faker->dateTimeInInterval($deliveryFrom, '+1 day')->setTime(0, 0, 0);
+        $deliveryTo = $this->faker->dateTimeInInterval($deliveryFrom, '+90 day')->setTime(0, 0, 0);
 
         return [
             'curriculum_id' => $curriculumId,

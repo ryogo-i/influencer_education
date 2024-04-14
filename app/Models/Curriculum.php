@@ -38,16 +38,16 @@ class Curriculum extends Model
             ->where(function ($query) use ($startDate, $endDate) {
                 $query->whereHas('deliveryTimes', function ($q) use ($startDate, $endDate) {
                     $q->where(function ($subQuery) use ($startDate, $endDate) {
-                        $subQuery->whereBetween('delivery_from', [$startDate, $endDate])
-                            ->orWhereBetween('delivery_to', [$startDate, $endDate]);
+                        $subQuery->where('delivery_from', '<=', $endDate) //修正
+                            ->where('delivery_to', '>=', $startDate); //修正
                     });
                 })->orWhere('alway_delivery_flg', 1);
             })
             ->with([
                 'deliveryTimes' => function ($query) use ($startDate, $endDate) {
                     $query->where(function ($q) use ($startDate, $endDate) {
-                        $q->whereBetween('delivery_from', [$startDate, $endDate])
-                            ->orWhereBetween('delivery_to', [$startDate, $endDate]);
+                        $q->where('delivery_from', '<=', $endDate) //修正
+                            ->where('delivery_to', '>=', $startDate); //修正
                     });
                 }
             ]);

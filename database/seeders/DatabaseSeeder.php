@@ -16,14 +16,13 @@ class DatabaseSeeder extends Seeder
     {
 
 
-        // \App\Models\Curriculum::factory(9)->create();
-        $this->call(DeliveryTimesTableSeeder::class);
         // $this->call([
         //     ClassesTableSeeder::class,
         // ]);
 
         // $this->call(UsersTableSeeder::class);
-        // \App\Models\User::factory(10)->create();
+        // \App\Models\Curriculum::factory(20)->create();
+        $this->call(DeliveryTimesTableSeeder::class);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

@@ -31,7 +31,7 @@
                                     <li class="detail">
                                         {{ Carbon\Carbon::parse($deliveryTime->delivery_from)->format('n月j日 H:i') }}
                                         ~
-                                        {{ Carbon\Carbon::parse($deliveryTime->delivery_to)->format('H:i') }}
+                                        {{ Carbon\Carbon::parse($deliveryTime->delivery_to)->format('n月j日 H:i') }}
                                     </li>
                                 @endforeach
                             @endif
