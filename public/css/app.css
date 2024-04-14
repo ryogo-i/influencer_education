@@ -71,7 +71,8 @@ header {
 
 .profile_image div {
     display: flex;
-    flex-direction: column; /* divのpタグ、inputタグを縦に配置 */
+    flex-direction: column;
+    /* divのpタグ、inputタグを縦に配置 */
 }
 
 .profile_form label,
@@ -104,6 +105,7 @@ header {
 .alert_success {
     color: red;
 }
+
 /* ユーザーお知らせ */
 .date p,
 .title p {
@@ -146,8 +148,7 @@ header {
     margin-left: 20px;
 }
 
-.grade_class_title
-.class_title {
+.grade_class_title .class_title {
     display: flex;
     flex-direction: column;
 }
@@ -190,7 +191,7 @@ header {
 }
 
 .not_clear {
-    visibility: hidden; 
+    visibility: hidden;
     font-size: small;
 }
 
@@ -224,7 +225,8 @@ header {
     margin-left: 20px;
 }
 
-.article_table th,td {
+.article_table th,
+td {
     text-align: left;
     font-weight: normal;
     font-size: 20px;
@@ -248,6 +250,7 @@ header {
     background-color: rgb(19, 158, 149);
     font-size: medium;
 }
+
 .delete_btn {
     background-color: rgb(218, 33, 33);
 }
@@ -275,8 +278,8 @@ header {
 
 .article_form textarea {
     width: 40%;
-    height: 100px; 
-    resize: vertical; 
+    height: 100px;
+    resize: vertical;
 }
 
 .article button {

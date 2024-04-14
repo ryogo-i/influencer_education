@@ -48,11 +48,13 @@ class User extends Authenticatable
     ];
 
     // classesテーブルとの関係性
-    public function grade() {
+    public function grade()
+    {
         return $this->belongsTo(Grade::class, 'classes_id');
     }
 
-    public function getProfile() {
+    public function getProfile()
+    {
         // userテーブルからデータを取得
         $profiles = User::all();
 
@@ -60,12 +62,14 @@ class User extends Authenticatable
     }
 
     // classes_clear_checksテーブルのclasses_idを関連付け
-    public function classesClearCheck() {
+    public function classesClearCheck()
+    {
         return $this->belongsTo(ClassesClearCheck::class, 'classes_id');
     }
 
     // curriculum_progress	テーブルとの関連性
-    public function curriculumProgress() {
+    public function curriculumProgress()
+    {
         return $this->hasMany(CurriculumProgress::class, 'users_id');
     }
 }
