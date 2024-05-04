@@ -1,0 +1,36 @@
+[33mcommit fff4c40f65ed2b855c9302ce7308910183f8c002[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: richard6410 <tetsu.t6410@gmail.com>
+Date:   Sat May 4 00:42:08 2024 +0900
+
+    Revert "具体的な変更内容を記述"
+    
+    This reverts commit cc6443323b6a17f90d73ecf8f6e77b5b2d6521b2.
+
+[33mcommit 570460fd2a4cb181aea75a456304d189bbdf06d4[m
+Author: richard6410 <tetsu.t6410@gmail.com>
+Date:   Thu May 2 05:27:10 2024 +0900
+
+    Revert "Initial commit"
+    
+    This reverts commit 211309fe69cc133a83bc3e4ebb55f471dc4468c8.
+
+[33mcommit c80b3f4bf9bc5743e2af5d19f475e6e8e4d275fd[m
+Merge: 211309f cc64433
+Author: richard6410 <136908503+richard6410@users.noreply.github.com>
+Date:   Fri Apr 26 02:23:06 2024 +0900
+
+    Merge pull request #1 from ryogo-i/feature/takayama
+    
+    具体的な変更内容を記述
+
+[33mcommit cc6443323b6a17f90d73ecf8f6e77b5b2d6521b2[m[33m ([m[1;31morigin/feature/takayama[m[33m, [m[1;32mfeature-branch[m[33m)[m
+Author: richard6410 <tetsu.t6410@gmail.com>
+Date:   Thu Apr 25 14:45:42 2024 +0900
+
+    具体的な変更内容を記述
+
+[33mcommit 211309fe69cc133a83bc3e4ebb55f471dc4468c8[m
+Author: ryogo-i <bbhf0617@gmail.com>
+Date:   Sat Dec 30 16:34:43 2023 +0900
+
+    Initial commit
