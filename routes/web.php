@@ -18,7 +18,7 @@ use App\Http\Controllers\DeliveryController;
 */
 
 Route::get('/', function () {
-    return view('admin.layouts.curriculum_edit');
+    return view('admin.layouts.delivery');
 });
 
 Route::get('/list', [App\Http\Controllers\ArticleController::class, 'showList'])->name('list');
@@ -41,3 +41,7 @@ Route::get('/article_edit', [ArticleController::class, 'edit'])->name('article_e
 
 // バナー管理
 Route::get('/banner_edit', [BannerController::class, 'edit'])->name('banner_edit');
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+
+Route::post('/save-delivery', [DeliveryController::class, 'save'])->name('save_delivery');

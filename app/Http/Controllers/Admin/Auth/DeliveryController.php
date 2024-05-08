@@ -92,4 +92,13 @@ class DeliveryController extends Controller
     {
         //
     }
+
+    public function save(Request $request)
+    {
+        $classTitle = $request->input('class-title');
+        $startDate = $request->input('start-date');
+        $startTime = $request->input('start-time');
+        $endDate = $request->input('end-date');
+        $endTime = $request->input('end-time');
+    }
 }
