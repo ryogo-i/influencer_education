@@ -7,15 +7,9 @@
 <div id="date-time-form">
     <h2>配信日時設定</h2>
     
-<<<<<<< HEAD
     <form method="POST" action="{{ route('save_delivery') }}">
     @csrf
         <div class="title-entry">
-=======
-    <form>
-        <div class="title-entry">
-            <label for="class-title">授業タイトル:</label>
->>>>>>> cc6443323b6a17f90d73ecf8f6e77b5b2d6521b2
             <input type="text" id="class-title" name="class-title" placeholder="授業タイトルを入力">
         </div>
 
