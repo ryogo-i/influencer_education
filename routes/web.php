@@ -18,11 +18,7 @@ use App\Http\Controllers\DeliveryController;
 */
 
 Route::get('/', function () {
-<<<<<<< HEAD
-    return view('admin.layouts.delivery');
-=======
-    return view('admin.layouts.curriculum_list');
->>>>>>> cc6443323b6a17f90d73ecf8f6e77b5b2d6521b2
+    return view('admin.layouts.curriculum_edit');
 });
 
 Route::get('/list', [App\Http\Controllers\ArticleController::class, 'showList'])->name('list');
@@ -44,12 +40,8 @@ Route::get('/admin/auth/curriculum_edit', [App\Http\Controllers\Admin\Auth\Curri
 Route::get('/article_edit', [ArticleController::class, 'edit'])->name('article_edit');
 
 // バナー管理
-<<<<<<< HEAD
 Route::get('/banner_edit', [BannerController::class, 'edit'])->name('banner_edit');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 
 Route::post('/save-delivery', [DeliveryController::class, 'save'])->name('save_delivery');
-=======
-Route::get('/banner_edit', [BannerController::class, 'edit'])->name('banner_edit');
->>>>>>> cc6443323b6a17f90d73ecf8f6e77b5b2d6521b2

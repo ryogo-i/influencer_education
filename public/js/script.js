@@ -6,10 +6,20 @@ document.addEventListener('DOMContentLoaded', function() {
       form.insertBefore(newEntry, this);
     });
   
-    document.addEventListener('click', function(e) {
-      if (e.target.classList.contains('delete-btn')) {
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('delete-btn')) {
         e.target.parentElement.remove();
       }
     });
   });
+
+document.getElementById('image').onchange = function(event) {
+    var reader = new FileReader();
+    reader.onload = function() {
+        var output = document.getElementById('image-preview');
+        output.src = reader.result;
+        output.style.display = 'block';  // プレビューを表示
+    };
+    reader.readAsDataURL(event.target.files[0]);
+};
   

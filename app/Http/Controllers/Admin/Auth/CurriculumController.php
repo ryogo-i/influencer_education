@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use Illuminate\Http\Request;
-<<<<<<< HEAD
 use App\Http\Controllers\Controller;
-=======
->>>>>>> cc6443323b6a17f90d73ecf8f6e77b5b2d6521b2
 use App\Models\Curriculum;
 
 
