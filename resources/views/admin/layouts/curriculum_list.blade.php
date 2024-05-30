@@ -1,25 +1,39 @@
 @extends('admin.layouts.app')
 
+@section('title', '授業一覧')
+
 @section('content')
-<h1>授業一覧</h1>
+<div class="main-container">
+    @include('admin.layouts.sidebar')
+    <div class="content">
+        <h1>授業一覧</h1>
 
-<div class="grid-container">
-    <button class="new-registration">新規登録</button>
+    <a href="{{ route('curriculum.create')  }}" class="btn btn-success mb-3">新規登録</a>
 
-    {{-- @forelseを使って、授業がある場合とリストが空の場合の両方を処理 --}}
-    @forelse ($lessons as $lesson)
+<div class="cards">
+    @foreach ($curriculums as $curriculum)
         <div class="card">
-            <img src="{{ asset('storage/'.$lesson->thumbnail) }}" alt="授業画像" class="thumbnail">
-            <h2 class="title">{{ $lesson->title }}</h2>
-            <p class="time">{{ $lesson->start_time->format('Y/m/d H:i') }} ~ {{ $lesson->end_time->format('Y/m/d H:i') }}</p>
-            <p class="grade">{{ $lesson->grade }}</p>
-            <div class="actions">
-                <button class="edit-content">授業内容編集</button>
-                <button class="edit-time">配信日時編集</button>
+            <img src="{{ asset('storage/images/' . $curriculum->thumbnail) }}" alt="カリキュラム画像">
+            <div class="card-body">
+                <h3 class="card-title">{{ $curriculum->title }}</h3>
+                <p>{{ $curriculum->description }}</p>
+                @if ($curriculum->deliveryTimes->isNotEmpty())
+                    <p>配信日時:</p>
+                    <ul>
+                        @foreach ($curriculum->deliveryTimes as $deliveryTime)
+                            <li>{{ $deliveryTime->delivery_from }} 〜 {{ $deliveryTime->delivery_to }}</li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p>配信日時は設定されていません。</p>
+                @endif
+                <a href="{{ route('curriculum.edit', $curriculum->id) }}" class="btn btn-primary">授業内容編集</a>
+                <a href="{{ route('delivery.edit', $curriculum->id) }}" class="btn btn-primary">配信日時編集</a>
             </div>
         </div>
-    @empty
-        <p>表示する授業がありません。</p>
-    @endforelse
+    @endforeach
+        </div>
+    </div>
 </div>
 @endsection
+

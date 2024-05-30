@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ClasssettingController;
-use App\Http\Controllers\CurriculumController;
-use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\Admin\CurriculumController;
+use App\Http\Controllers\Admin\DeliveryController;
+use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\LoginController;
 
 
 /*
@@ -18,30 +20,35 @@ use App\Http\Controllers\DeliveryController;
 */
 
 Route::get('/', function () {
-    return view('admin.layouts.curriculum_edit');
+    return view('admin.layouts.curriculum_list');
+});
+//仮
+Route::get('/', [CurriculumController::class, 'index'])->name('curriculum_list');
+
+// 管理パネル関連
+Route::prefix('admin')->group(function () {
+    // Delivery関連
+    Route::get('/delivery', [DeliveryController::class, 'index'])->name('delivery.index');
+    Route::post('/save-delivery', [DeliveryController::class, 'save'])->name('save_delivery');
+    Route::get('/delivery/{id}/edit', [DeliveryController::class, 'edit'])->name('delivery.edit');
+    Route::put('/delivery/{id}', [DeliveryController::class, 'update'])->name('delivery.update');
+    Route::resource('delivery', DeliveryController::class);
+
+    // Curriculum関連
+    Route::get('/curriculum_list', [CurriculumController::class, 'index'])->name('curriculum_list');
+    Route::get('/curriculum/create', [CurriculumController::class, 'create'])->name('curriculum.create');
+    Route::post('/curriculum', [CurriculumController::class, 'store'])->name('curriculum.store');
+    Route::get('/curriculum/{id}/edit', [CurriculumController::class, 'edit'])->name('curriculum.edit');
+    Route::put('/curriculum/{id}', [CurriculumController::class, 'update'])->name('curriculum.update');
+    Route::get('curriculums', [CurriculumController::class, 'index'])->name('curriculum.list');
+    Route::get('curriculums/grade/{grade_id}', [CurriculumController::class, 'showByGrade'])->name('curriculum.by_grade');
+
+    // Article関連
+    Route::get('/article_edit', [ArticleController::class, 'edit'])->name('article_edit');
+
+    // Banner関連
+    Route::get('/banner_edit', [BannerController::class, 'edit'])->name('banner_edit');
 });
 
-Route::get('/list', [App\Http\Controllers\ArticleController::class, 'showList'])->name('list');
-
-// フォーム表示
-Route::get('/classsetting', [ClasssetteigController::class, 'create'])->name('course.create');
-// フォーム送信処理
-Route::post('/classsetting', [ClassSettingController::class, 'store'])->name('classsetting.store');
-
-Route::get('/curriculums', [CurriculumController::class, 'index'])->name('curriculums.index');
-
-Route::get('/delivery/create/{curriculum}', [DeliveryController::class, 'create'])->name('delivery.create');
-Route::post('/delivery/store', [DeliveryController::class, 'store'])->name('delivery.store');
-
-// 授業管理
-Route::get('/admin/auth/curriculum_edit', [App\Http\Controllers\Admin\Auth\CurriculumController::class, 'edit'])->name('curriculum_edit');
-
-// お知らせ管理
-Route::get('/article_edit', [ArticleController::class, 'edit'])->name('article_edit');
-
-// バナー管理
-Route::get('/banner_edit', [BannerController::class, 'edit'])->name('banner_edit');
-
+// ログイン関連
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-
-Route::post('/save-delivery', [DeliveryController::class, 'save'])->name('save_delivery');

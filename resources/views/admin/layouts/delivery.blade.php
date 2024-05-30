@@ -1,31 +1,49 @@
 @extends('admin.layouts.app')
 
-@section('title', '配信日時設定')
+@section('title', '配信日時編集')
 
 @section('content')
+    <h1>配信日時編集</h1>
 
-<div id="date-time-form">
-    <h2>配信日時設定</h2>
-    
-    <form method="POST" action="{{ route('save_delivery') }}">
-    @csrf
-        <div class="title-entry">
-            <input type="text" id="class-title" name="class-title" placeholder="授業タイトルを入力">
+    <form action="{{ route('delivery.update', $curriculum->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+
+        <div id="delivery-time-container">
+        @forelse ($deliveryTimes as $deliveryTime)
+            <div class="delivery-time-item">
+                <div class="form-group">
+                    <label for="delivery_from">配信開始日時</label>
+                    <input type="datetime-local" name="delivery_from[]" value="{{ \Carbon\Carbon::parse($deliveryTime->delivery_from)->format('Y-m-d\TH:i') }}" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="delivery_to">配信終了日時</label>
+                    <input type="datetime-local" name="delivery_to[]" value="{{ \Carbon\Carbon::parse($deliveryTime->delivery_to)->format('Y-m-d\TH:i') }}" class="form-control">
+                </div>
+
+                <button type="button" class="btn btn-de remove-delivery-time">&#x2212;</button>
+            </div>
+        </div>
+        @empty
+        <div class="delivery-time-item">
+                    <div class="form-group">
+                        <label for="delivery_from">配信開始日時</label>
+                        <input type="datetime-local" name="delivery_from[]" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="delivery_to">配信終了日時</label>
+                        <input type="datetime-local" name="delivery_to[]" class="form-control">
+                    </div>
+
+                    <button type="button" class="btn btn-de remove-delivery-time">&#x2212;</button>
+                </div>
+            @endforelse
         </div>
 
+        <button type="button" class="btn btn-success" id="add-delivery-time">&#x2b;</button>
 
-        <div class="date-time-entry">
-            <input type="date" id="start-date" name="start-date">
-            <input type="time" id="start-time" name="start-time">
-            <span>〜</span>
-            <input type="date" id="end-date" name="end-date">
-            <input type="time" id="end-time" name="end-time">
-            <button type="button" class="delete-btn"></button>
-        </div>
-        <button type="button" id="add-button"></button>
-        <div class="button-container">
-            <input type="submit" class="submit-button" value="登録">
-        </div>
+        <button type="submit" class="btn btn-primary">登録する</button>
     </form>
-</div>
 @endsection

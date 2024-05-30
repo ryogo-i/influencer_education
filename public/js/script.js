@@ -1,17 +1,22 @@
+//delivery
+
+
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('add-button').addEventListener('click', function() {
-      const form = document.querySelector('form');
-      const newEntry = document.querySelector('.date-time-entry').cloneNode(true);
+  const addButton = document.getElementById('add-delivery-time');
+
+  addButton.addEventListener('click', function() {
+      console.log('Add button clicked'); // デバッグ用のログ出力
+      const container = document.getElementById('delivery-time-container');
+      const newEntry = container.querySelector('.delivery-time-item').cloneNode(true);
       newEntry.querySelectorAll('input').forEach(input => input.value = '');
-      form.insertBefore(newEntry, this);
-    });
-  
-document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('delete-btn')) {
-        e.target.parentElement.remove();
-      }
-    });
+      container.appendChild(newEntry);
   });
+
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('remove-delivery-time')) {
+          e.target.closest('.delivery-time-item').remove();
+      }
+});
 
 document.getElementById('image').onchange = function(event) {
     var reader = new FileReader();
@@ -22,4 +27,4 @@ document.getElementById('image').onchange = function(event) {
     };
     reader.readAsDataURL(event.target.files[0]);
 };
-  
+});
